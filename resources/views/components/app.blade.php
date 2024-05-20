@@ -15,13 +15,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('public/admin') }}/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('public/admin') }}/dist/css/adminlte.min.css">
+  @stack('style')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-    <div class="preloader flex-column justify-content-center align-items-center">
+    {{-- <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__shake" src="{{ asset('public/admin') }}/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-      </div>
+      </div> --}}
 
   <!-- Navbar -->
 <x-layout.header />
@@ -58,7 +59,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('public/admin') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('public/admin') }}/dist/js/adminlte.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
+<script src="{{ asset('data-tables/dataTables.js') }}"></script>
+<script src="{{ asset('data-tables/datatables.min.js') }}"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{{-- <script src="sweetalert2.all.min.js"></script> --}}
+
+@stack('script')
 </body>
 </html>

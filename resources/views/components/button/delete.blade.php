@@ -4,6 +4,7 @@
 
 @push('script')
     @once
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
             const deleteData = (id, path) => {
                 const base_url = '{{ url('/') }}'

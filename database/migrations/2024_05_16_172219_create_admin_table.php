@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('username');
             $table->string('password');
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

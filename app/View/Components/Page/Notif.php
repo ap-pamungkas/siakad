@@ -1,22 +1,19 @@
 <?php
 
-namespace App\View\Components\Button;
+namespace App\View\Components\Page;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Delete extends Component
+class Notif extends Component
 {
     /**
      * Create a new component instance.
      */
-    public $id;
-    public $path;
-    public function __construct($id=null,  $path = null)
+    public function __construct()
     {
-        $this->id=$id;
-        $this->path=$path;
+        //
     }
 
     /**
@@ -24,6 +21,6 @@ class Delete extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.button.delete');
+        return view('components.page.notif');
     }
 }

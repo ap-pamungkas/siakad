@@ -29,21 +29,24 @@
                     <td> {{ $loop->iteration }}</td>
                     <td>
 
-                        <center>  <x-button.button-action url="{{ url('task/detail') }}/${row.id}" label="Detail" icon="fas fa-eye" class="btn btn-info" />
+                        <center>  <x-button.button-action url="{{ url('kepala-sekolah/detail') }}/{{ $kps->id }}" label="Detail" icon="fas fa-eye" class="btn btn-info" />
                             <x-button.button-action url="{{ url('/kepala-sekolah') }}/{{ $kps->id }}/edit" label="Edit" icon="fas fa-edit" class="btn btn-warning" />
-                            <x-button.button-action url="{{ url('/user') }}/${row.id}/edit" label="Hapus" icon="fas fa-trash" class="btn btn-danger" />
-                            {{-- <x-button.delete id="${row.id}" />  --}}
+
+                            <x-button.delete id="{{ $kps->id }}" />
                           </center>
                     </td>
                     <td id="nip"> {{ $kps->nip }}</td>
                     <td> {{ $kps->nama }}</td>
+                    {{-- <td> <img width="10%" src="{{ asset('public') }}/{{ $kps->foto }}" alt=""></td> --}}
                 </tr>
             </tbody>
             @endforeach
             </table>
 
         </div>
-    </div>
 
+
+    </div>
+<x-page.notif />
 
 </x-app>

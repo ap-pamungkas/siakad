@@ -19,9 +19,9 @@ class KepalaSekolah extends Model
     static $input = [
         'nip' => [
             'required',
-            'min:18',
-            'max:18',
-            'unique:kepala_sekolah,nip'
+            // 'min:18',
+            // 'max:18',
+
         ],
         'nama' => 'required',
         'password' =>
@@ -35,8 +35,8 @@ class KepalaSekolah extends Model
     static $pesan=[
         'nama.required' => 'Nama harus wajib di isi',
         'nip.required' => 'NIP harus wajib di isi',
-        'nip.min' => 'NIP minimal 18 karakter',
-        'nip.max' => 'NIP tidak boleh lebih dari 18 karakter',
+        // 'nip.min' => 'NIP minimal 18 karakter',
+        // 'nip.max' => 'NIP tidak boleh lebih dari 18 karakter',
         'password.required' => 'Password harus wajib di isi',
 
     ];

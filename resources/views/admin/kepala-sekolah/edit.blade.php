@@ -22,15 +22,15 @@
 
                     <div class="col-md-12">
                         <label for="" class="form-label">Nip</label>
-                        <input type="number" value="{{ $kps->nip }}" name="nip" class="form-control">
+                        <input type="number" value="{{ $kps->nip }}" name="nip" class="form-control" minlength="18" maxlength="18">
                         @error('nip')
                         <span class="text-danger float-end" id="nip">{{$message}}</span>
                         @enderror
                     </div>
                     <div class="col-md-12">
                         <label for="" class="form-label">password</label>
-                        <input type="password" name="password" class="form-control">
-                        @error('password')
+                        <input type="password" name="password" class="form-control" minlength="8" >
+                         @error('password')
                         <span class="text-danger float-end" id="password">{{$message}}</span>
                         @enderror
                     </div>
