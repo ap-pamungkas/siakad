@@ -28,11 +28,18 @@
                         @enderror
                     </div>
                     <div class="col-md-12">
+                        <label for="" class="form-label">Foto</label>
+                        <input type="file" name="foto" class="form-control">
+                        @error('images')
+                        <span class="text-danger float-end" id="nip">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-md-12">
                         <label for="" class="form-label">password</label>
                         <input type="password" name="password" class="form-control" minlength="8" >
-                         @error('password')
+                         {{-- @error('password')
                         <span class="text-danger float-end" id="password">{{$message}}</span>
-                        @enderror
+                        @enderror --}}
                     </div>
 
 

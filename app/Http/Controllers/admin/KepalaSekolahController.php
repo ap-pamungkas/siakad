@@ -27,13 +27,13 @@ class KepalaSekolahController extends Controller
     {
         $request->validate($kepalaSekolah::$input, $kepalaSekolah::$pesan);
         $imageName = time() . '.' . $request->foto->extension();
-        $request->foto->move(public_path('images'), $imageName);
+        $request->foto->move(public_path('images/kepala-sekolah'), $imageName);
 
 
         $kps = new $kepalaSekolah;
         $kps->nama = $request->nama;
         $kps->nip = $request->nip;
-        $kps->foto = 'images/' . $imageName;
+        $kps->foto = 'images/kepala-sekolah/' . $imageName;
 
         $kps->password = Hash::make($request->password);
 
@@ -48,31 +48,42 @@ class KepalaSekolahController extends Controller
         return view('admin.kepala-sekolah.edit', $data);
     }
 
-    function update(KepalaSekolah $kepalaSekolah, Request $request, $kps)
-    {
+  function update(KepalaSekolah $kepalaSekolah, Request $request, $kps)
+{
+  $request->validate($kepalaSekolah::$input, $kepalaSekolah::$pesan);
 
-
-
-        $request->validate($kepalaSekolah::$input, $kepalaSekolah::$pesan);
-
-        $kps = $kepalaSekolah->findOrFail($kps);
-        $kps->nama = $request->nama;
-
-
-        $kps->nip = $request->nip;
-
-
-        if ($request->filled('password')) {
-            $kps->password = Hash::make($request->password);
-
-
-            $kps->save();
-            return redirect('/kepala-sekolah')->with('upadate', 'Data Berhasil disimpan');
-        }
-
-
-
+  if ($request->hasFile('foto')) {
+    // Load the KepalaSekolah object if $kps is not an object
+    if (!is_object($kps)) {
+      $kps = KepalaSekolah::findOrFail($kps);
     }
+
+    // Now you can safely access $kps->foto
+    $fotoLama = $kps->foto;
+
+    if ($fotoLama && file_exists(storage_path($fotoLama))) {
+      unlink(storage_path($fotoLama));
+    }
+
+    $imageName = time() . '.' . $request->foto->extension();
+    $request->foto->move(public_path('images/kepala-sekolah'), $imageName);
+
+    $kps->foto = 'images/kepala-sekolah/' . $imageName;
+  }
+
+  // Update KepalaSekolah object regardless of foto change
+  $kps->nama = $request->nama;
+  $kps->nip = $request->nip;
+
+  if ($request->filled('password')) {
+    $kps->password = Hash::make($request->password);
+  }
+
+  $kps->save();
+  return redirect('/kepala-sekolah')->with('upadate', 'Data Berhasil disimpan');
+}
+
+
     public function show($id)
     {
         $data['kps'] = KepalaSekolah::findOrFail($id);
