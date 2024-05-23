@@ -15,6 +15,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('public/admin') }}/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('public/admin') }}/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ asset('public/admin') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ asset('public/admin') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ asset('public/admin') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="{{ asset('public/data-tables') }}/datatables.min.css">
+  <link rel="stylesheet" href="public/data-tables/datatables.css">
+
   @stack('style')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -61,11 +67,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('public/admin') }}/dist/js/adminlte.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
-<script src="{{ asset('data-tables/dataTables.js') }}"></script>
-<script src="{{ asset('data-tables/datatables.min.js') }}"></script>
+  <!-- jQuery Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Datatable JS -->
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script src="{{ asset('public/data-tables/dataTables.js') }}"></script>
+<script src="{{ asset('public/data-tables/datatables.min.js') }}"></script>
+
+<!-- AdminLTE App -->
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-{{-- <script src="sweetalert2.all.min.js"></script> --}}
+{{-- <script src="sweetalert2.all.min.js"></scrip> --}}
 
 @stack('script')
 </body>

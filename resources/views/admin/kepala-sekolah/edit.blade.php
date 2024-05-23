@@ -4,6 +4,7 @@
             <div class="card-title">
                 <h3 >Form Edit Data</h3>
             </div>
+            <a href="{{ url('/kepala-sekolah') }}" class="btn btn-primary float-right">Kembali</a>
         </div>
 
         <div class="card-body">
@@ -27,13 +28,19 @@
                         <span class="text-danger float-end" id="nip">{{$message}}</span>
                         @enderror
                     </div>
-                    <div class="col-md-12">
+
+                    <div class="col-md-12 ">
                         <label for="" class="form-label">Foto</label>
-                        <input type="file" name="foto" class="form-control">
+                        <input type="file" name="foto"  class="form-control">
+                        <div class="col-md-2 mt-2 ">
+                            <img class="bg-primary" src="{{asset('public') }}/{{ $kps->foto }} " alt="" width="100%">
+                        </div>
                         @error('images')
                         <span class="text-danger float-end" id="nip">{{$message}}</span>
                         @enderror
+
                     </div>
+
                     <div class="col-md-12">
                         <label for="" class="form-label">password</label>
                         <input type="password" name="password" class="form-control" minlength="8" >

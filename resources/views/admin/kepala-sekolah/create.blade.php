@@ -12,7 +12,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <label for="" class="form-label">ama</label>
+                        <label for="" class="form-label">Nama</label>
                         <input type="text" name="nama" class="form-control">
 
                         @error('nama')

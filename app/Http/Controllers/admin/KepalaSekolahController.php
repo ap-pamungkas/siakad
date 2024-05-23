@@ -50,13 +50,13 @@ class KepalaSekolahController extends Controller
 
   function update(KepalaSekolah $kepalaSekolah, Request $request, $kps)
 {
+    $kps = KepalaSekolah::findOrFail($kps);
   $request->validate($kepalaSekolah::$input, $kepalaSekolah::$pesan);
 
   if ($request->hasFile('foto')) {
     // Load the KepalaSekolah object if $kps is not an object
-    if (!is_object($kps)) {
-      $kps = KepalaSekolah::findOrFail($kps);
-    }
+
+
 
     // Now you can safely access $kps->foto
     $fotoLama = $kps->foto;
@@ -72,6 +72,7 @@ class KepalaSekolahController extends Controller
   }
 
   // Update KepalaSekolah object regardless of foto change
+
   $kps->nama = $request->nama;
   $kps->nip = $request->nip;
 

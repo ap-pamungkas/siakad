@@ -5,7 +5,7 @@
             <div class="card-title">
                 Data guru
             </div>
-            <a href="{{ url('guru/create') }}" class="btn btn-primary float-right"> Tambah
+            <a href="{{ url('mapel/create') }}" class="btn btn-primary float-right"> Tambah
                 <i class="fas fa-plus"></i>
             </a>
         </div>
@@ -16,11 +16,9 @@
   <th>No</th>
   <th>No</th>
   <th>Aksi</th>
-  <th>Nip</th>
-  <th>Nama</th>
-  <th>Jenis Kelamin</th>
-  <th>No Hp</th>
-  <th> Pengampuh Mata Pelajaran</th>
+  <th>Kode Mata Pelajaran</th>
+  <th>Nama Mata pelajaran</th>
+
 
 </tr>
             </thead>
@@ -41,7 +39,7 @@
   $('#y_dataTables').DataTable({
          processing: true,
          serverSide: true,
-         ajax: "{{ url('listGuru') }}",
+         ajax: "{{ url('listMapel') }}",
          columns: [
                   { data: 'id', name: 'id',  visible: false },
                   {
@@ -62,13 +60,10 @@
             </center>`;
         }
     },
-                  { data: 'nip', name: 'nip' },
-                  { data: 'nama', name: 'nama' },
+                  { data: 'kode_mapel', name: 'kode_mapel' },
+                  { data: 'nama_mapel', name: 'nama_mapel' },
 
-                { data: 'jk', name: 'jk' },
 
-                { data: 'tlp', name: 'tlp' },
-                { data: 'mapel.nama_mapel', name: 'mapel.nama_mapel' },
 
 
                ]

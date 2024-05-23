@@ -9,3 +9,4 @@ Route::get('/', function () {
 
 require __DIR__.'/admin/guru.php';
 require __DIR__.'/admin/kepala-sekolah.php';
+require __DIR__.'/admin/mapel.php';

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('jk');
             $table->string('foto')->nullable();
             $table->text('alamat');
-            $table->integer('tlp');
+            $table->char('tlp', 13);
             $table->string('mapel_id');
 
             $table->string('password');
