@@ -39,4 +39,31 @@ class MapelController extends Controller
 
         return view('index');
     }
+
+
+function edit($id){
+
+    $mapel['mapel'] = Mapel::findOrFail($id);
+    return view('admin.mapel.edit',$mapel);
+
+}
+
+ public function update(Request $request, $mapel){
+    $mapel = Mapel::findOrFail($mapel) ;
+
+    $mapel->kode_mapel = $request->kode_mapel;
+    $mapel->nama_mapel = $request->nama_mapel;
+    $mapel->save();
+
+    return redirect('/mapel')->with('update', 'data berhasil di Edit');
+}
+
+
+function destroy(Mapel $mapel)
+{
+    $mapel->delete();
+
+    return redirect('/mapel')->with('delete', 'Data Berhasil Dihapus');
+}
+
 }

@@ -71,12 +71,14 @@ class GuruController extends Controller
     function edit($id)
     {
         $data['guru'] = Guru::findOrFail($id);
+        $data['mapel'] = Mapel::all();
         return view('admin.guru.edit', $data);
     }
 
     function update(Request $request, $guru)
     {
         $guru = Guru::findOrFail($guru);
+
 
 
         if ($request->hasFile('foto')) {

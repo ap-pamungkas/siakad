@@ -8,7 +8,7 @@
         <div class="card-body">
             <form action="{{ url('/guru/update') }}/{{ $guru->id }}" enctype="multipart/form-data" method="POST">
                 @csrf
-@method('PUT')
+            @method('PUT')
                 <div class="row">
                     <div class="col-md-6">
                         <label for="" class="form-label">Nama</label></label>
@@ -21,7 +21,7 @@
 
                     <div class="col-md-6">
                         <label for="" class="form-label">Nip</label>
-                        <input type="number" name="nip" value="{{ $guru->nip }}" class="form-control">
+                        <input type="number" value="{{ $guru->nip  }}" name="nip" class="form-control">
                         @error('nip')
                             <span class="text-danger float-end" id="nip">{{ $message }}</span>
                         @enderror
@@ -33,7 +33,7 @@
                         <label for="" class="form-label">Jenis Kelamin</label></label>
 
                         <select class="form-control select2" style="width: 100%;" name="jk">
-                            <option >{{ $guru->jk }}</option>
+                            <option value="{{ $guru->jk }}" >{{ $guru->jk }}</option>
                             <option value="laki-laki">laki-laki</option>
                             <option value="perempuan">perempuan</option>
 
@@ -59,9 +59,10 @@
                         <label for="" class="form-label">Mapel</label></label>
 
                         <select class="form-control select2" style="width: 100%;" name="mapel_id">
-                            <option >{{ $guru->mapel_id }}</option>
-                            <option value="ipa">IPA</option>
-                            <option value="ips">IPS</option>
+                            <option >Pilih Mata Pelajaran Yang Di ampuh</option>
+                           @foreach ($mapel as $mapel)
+                            <option value="{{ $mapel->id }}">{{ $mapel->nama_mapel }}</option>
+                          @endforeach
 
                           </select>
 
@@ -73,7 +74,7 @@
 
                 <div class="col-md-6">
                     <label for="" class="form-label">No hp</label>
-                    <input type="number" name="tlp" value="{{ $guru->tlp}}" class="form-control">
+                    <input type="number" value="{{ $guru->tlp }}" name="tlp" class="form-control">
                     @error('tlp')
                         <span class="text-danger float-end" id="nip">{{ $message }}</span>
                     @enderror
@@ -83,7 +84,7 @@
                 <div class="row">
                 <div class="col-md-12">
                     <label for="" class="form-label">Alamat</label>
-                   <textarea name="alamat" id="" class="form-control"> {{ $guru->alamat }}</textarea>
+                   <textarea name="alamat" id="" class="form-control">{{ $guru->alamat }}</textarea>
                     {{-- @error('nip')
                         <span class="text-danger float-end" id="nip">{{ $message }}</span>
                     @enderror --}}

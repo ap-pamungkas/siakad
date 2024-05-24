@@ -21,7 +21,7 @@
        <x-layout.sidebar.menu-item label="Dashboard" icon="fas fa-home" url="/" />
        <x-layout.sidebar.menu-item label="Kepala Sekolah" icon="fas fa-user-tie" url="/kepala-sekolah" />
        <x-layout.sidebar.menu-item label="Guru" icon="fas fa-user" url="/guru" />
-       <x-layout.sidebar.menu-item label="Siswa" icon="fas fa-users" url="/" />
+       <x-layout.sidebar.menu-item label="Siswa" icon="fas fa-users" url="/siswa" />
        <x-layout.sidebar.menu-item label="Mata Pelajaran" icon="fas fa-book" url="/mapel" />
         </ul>
       </nav>

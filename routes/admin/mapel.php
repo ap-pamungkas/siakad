@@ -14,9 +14,9 @@ Route::controller(MapelController::class)->group(function () {
     Route::get('/mapel/create', 'create');
     Route::post('/mapel/store', 'store');
     Route::get('listMapel',  'dataTableLogic')->name('list');
-    // Route::get('/guru/detail/{guru}',  'show');
-    // Route::get('/guru/{guru}/edit',  'edit');
-    // Route::put('/guru/update/{guru}',  'update');
-    // Route::delete('/guru/{guru}', 'destroy');
+  
+    Route::get('/mapel/{mapel}/edit',  'edit');
+    Route::put('/mapel/update/{mapel}',  'update');
+    Route::delete('/mapel/{mapel}', 'destroy');
 });
 

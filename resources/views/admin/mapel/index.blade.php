@@ -54,8 +54,8 @@
        render: function(data, type, row) {
          // Buat tombol aksi secara dinamis di dalam fungsi render
          return `
-          <center>  <x-button.button-action url="{{ url('/guru/detail/') }}/${row.id}" label="Detail" icon="fas fa-eye" class="btn btn-info" />
-            <x-button.button-action url="{{ url('/guru') }}/${row.id}/edit" label="Edit" icon="fas fa-edit" class="btn btn-warning" />
+          <center>
+            <x-button.button-action url="{{ url('/mapel') }}/${row.id}/edit" label="Edit" icon="fas fa-edit" class="btn btn-warning" />
             <x-button.delete id="${row.id}" />
             </center>`;
         }
@@ -71,7 +71,7 @@
    });
 </script>
 @endpush
-
+{{-- <x-button.button-action url="{{ url('/guru/detail/') }}/${row.id}" label="Detail" icon="fas fa-eye" class="btn btn-info" /> --}}
 
 
 </x-app>
