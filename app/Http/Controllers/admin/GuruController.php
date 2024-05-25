@@ -54,7 +54,8 @@ class GuruController extends Controller
     $guru->tlp = $request->tlp;
     $guru->mapel_id = $request->mapel_id;
     $guru->password = Hash::make($request->password);
-    $guru->foto = json_encode($photoPaths);  // Store photo paths as JSON array
+    $guru->foto = json_encode($photoPaths);
+    $guru->kelas->id = $request->kelas_id;
     $guru->save();
 
     return redirect('/guru')->with('create', 'Data Berhasilahkan');
@@ -62,7 +63,7 @@ class GuruController extends Controller
     public function dataTableLogic(Request $request)
 {
     if ($request->ajax()) {
-        $guru = Guru::with('mapel') // Eager load the related Mapel model
+        $guru = Guru::with('mapel', 'kelas') // Eager load the related Mapel model
             ->orderBy('updated_at', 'desc');
 
             return datatables()->of($guru)
@@ -91,9 +92,9 @@ class GuruController extends Controller
     function update(Request $request, Guru $guru)
     {
         $guru = Guru::findOrFail($guru->id);
-    
+
         $existingPhotoPaths = json_decode($guru->foto, true); // Get existing photo paths
-    
+
         // Process uploaded photos
         $photoPaths = [];
         foreach ($request->file('foto') as $key => $photo) {
@@ -101,14 +102,14 @@ class GuruController extends Controller
             $path = Storage::disk('public')->put('images/guru', $photo);
             $photoPaths[] = $path;
         }
-    
+
         // Delete old photos if not present in new set
         foreach ($existingPhotoPaths as $existingPath) {
             if (!in_array($existingPath, $photoPaths)) {
                 Storage::disk('public')->delete($existingPath);
             }
         }
-    
+
         // Update teacher data
         $guru->nama = $request->nama;
         $guru->nip = $request->nip;
@@ -117,16 +118,17 @@ class GuruController extends Controller
         $guru->tlp = $request->tlp;
         $guru->foto = json_encode($photoPaths);
         $guru->mapel_id = $request->mapel_id;
-    
+        $guru->kelas->id = $request->kelas_id;
+
         if ($request->filled('password')) {
             $guru->password = Hash::make($request->password);
         }
-    
+
         $guru->save();
-    
+
         return redirect('/guru')->with('update', 'Data Berhasil disimpan');
     }
-    
+
 
 
 
