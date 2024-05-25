@@ -7,26 +7,41 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ url('/mapel/update') }}/{{$mapel->id}}" enctype="multipart/form-data" method="POST">
+            <form action="{{ url('/kelas/store') }}" enctype="multipart/form-data" method="POST">
                 @csrf
-@method("PUT")
+
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="" class="form-label">Kode Mata Pelajaran</label>
-                        <input type="text" name="kode_mapel" value="{{ $mapel->kode_mapel  }}" class="form-control">
+                        <label for="" class="form-label">Tingkat Kelas</label>
+                        <input type="text" name="tingkat_kelas" class="form-control">
 
                         {{-- @error('nama')
                         <span class="text-danger float-end" id="nama">{{$message}}</span>
                         @enderror --}}
                     </div>
                     <div class="col-md-6">
-                        <label for="" class="form-label">Mata Pelajaran</label>
-                        <input type="text" name="nama_mapel" value="{{ $mapel->nama_mapel  }}" class="form-control">
+                        <label for="" class="form-label">Nama Kelas</label></label>
+                        <input type="text" name="nama_kelas" class="form-control">
+
+                        @error('nama')
+                        <span class="text-danger float-end" id="nama">{{$message}}</span>
+                        @enderror
+                    </div>
+                    <div class="col-md-12">
+                        <label for="" class="form-label">Wali Kelas</label></label>
+                        <select class="form-control select2" style="width: 100%;" name="guru_id">
+                            <option >Pilih Wali Kelas</option>
+                           @foreach ($guru as $guru)
+                            <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                          @endforeach
+
+                          </select>
 
                         {{-- @error('nama')
                         <span class="text-danger float-end" id="nama">{{$message}}</span>
                         @enderror --}}
                     </div>
+
 
                 </div>
 

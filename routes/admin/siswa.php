@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(SiswaController::class)->group(function () {
 
     Route::get('/siswa', 'index');
-    Route::get('/create/create', 'create');
+    Route::get('/siswa/create', 'create');
     // Route::post('/guru/store', 'store');
     // Route::get('listGuru',  'dataTableLogic')->name('list');
     // Route::get('/guru/detail/{guru}',  'show');

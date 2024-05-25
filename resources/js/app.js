@@ -10,7 +10,7 @@ Swal.fire({
     timer: 2000, // Duration to display the notification (in milliseconds)
 });
 
-;
+
 
 let table = new DataTable('#myTable', {
     responsive: true

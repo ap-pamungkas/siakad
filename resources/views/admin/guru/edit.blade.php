@@ -4,6 +4,7 @@
             <div class="card-title">
                 Tambah Data Guru
             </div>
+            <a class = "btn btn-warning float-right " href="{{url('/guru')}}"><i class="fas fa-arrow-left"> </i> Batal </a>
         </div>
         <div class="card-body">
             <form action="{{ url('/guru/update') }}/{{ $guru->id }}" enctype="multipart/form-data" method="POST">
@@ -47,7 +48,7 @@
 
                 <div class="col-md-6">
                     <label for="" class="form-label">Foto</label>
-                    <input type="file" name="foto" class="form-control">
+                    <input type="file"  name="foto[]" class="form-control">
                     @error('images')
                         <span class="text-danger float-end" id="nip">{{ $message }}</span>
                     @enderror
@@ -59,7 +60,12 @@
                         <label for="" class="form-label">Mapel</label></label>
 
                         <select class="form-control select2" style="width: 100%;" name="mapel_id">
-                            <option >Pilih Mata Pelajaran Yang Di ampuh</option>
+                           @if (@isset($guru) )
+                               <option value="{{ $guru->mapel_id }}" selected> {{ $guru->mapel->nama_mapel }} </option>
+                           @endif
+
+
+                            ?>
                            @foreach ($mapel as $mapel)
                             <option value="{{ $mapel->id }}">{{ $mapel->nama_mapel }}</option>
                           @endforeach
@@ -103,6 +109,7 @@
 
 <div class="row">
                 <div class="col-md-12 mt-4">
+              
                     <button type="submit" class="btn btn-primary float-right"><i class="fas fa-save"></i> Save</button>
                 </div>
             </div>

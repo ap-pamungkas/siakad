@@ -1,4 +1,4 @@
-@foreach(['create', 'update', 'delete'] as $status)
+@foreach(['create', 'update', 'delete', 'error'] as $status)
 
   @if(session()->has($status))
     @push('script')
@@ -15,6 +15,9 @@
               break;
             case 'delete':
               message = 'Data Berhasil Dihapus!';
+              break;
+            case 'error':
+              message = 'Data Tidak Ditemukan!';
               break;
           }
 

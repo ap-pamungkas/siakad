@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Guru;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Mapel;
 
 class GuruController extends Controller
@@ -24,27 +25,40 @@ class GuruController extends Controller
         return view('admin.guru.create', $data);
     }
 
-    function store(Request $request)
-    {
+    public function store(Request $request)
+  {
+    // $validatedData = $request->validate([
+    //   'nama' => 'required',
+    //   'nip' => 'required|unique:guru,nip',  // Ensure unique NIP
+    //   'jk' => 'required|in:L,P',  // Validate gender (L/P)
+    //   'alamat' => 'required',
+    //   'tlp' => 'required',
+    //   'mapel_id' => 'required|exists:mapel,id',  // Ensure valid mapel ID
+    //   'password' => 'required|min:8|confirmed',  // Validate password
+    //   'foto' => 'required|array|mimes:jpeg,png,jpg|max:2048',  // Validate multiple photos
+    // ]);
 
-        $request->validate(Guru::$inputan, Guru::$pesan);
-
-        $imageName = time() . '.' . $request->foto->extension();
-        $request->foto->move(public_path('images/guru'), $imageName);
-        $guru = new Guru;
-
-        $guru->nama = $request->nama;
-        $guru->nip = $request->nip;
-        $guru->jk = $request->jk;
-        $guru->alamat = $request->alamat;
-        $guru->tlp = $request->tlp;
-        $guru->mapel_id = $request->mapel_id;
-        $guru->password = Hash::make($request->password);
-        $guru->foto = 'images/guru/' . $imageName;
-        $guru->save();
-        return redirect('/guru')->with('create', 'Data Berhasilahkan');
+    $photoPaths = [];
+    foreach ($request->file('foto') as $key => $photo) {
+      $fileName = time() . '_' . $photo->getClientOriginalName();  // Unique filename
+      $path = Storage::disk('public')->put('images/guru', $photo);  // Save to 'public/images/guru'
+      $photoPaths[] = $path;
     }
 
+    // Save teacher data to the database
+    $guru = new Guru;
+    $guru->nama = $request->nama;
+    $guru->nip = $request->nip;
+    $guru->jk = $request->jk;
+    $guru->alamat = $request->alamat;
+    $guru->tlp = $request->tlp;
+    $guru->mapel_id = $request->mapel_id;
+    $guru->password = Hash::make($request->password);
+    $guru->foto = json_encode($photoPaths);  // Store photo paths as JSON array
+    $guru->save();
+
+    return redirect('/guru')->with('create', 'Data Berhasilahkan');
+  }
     public function dataTableLogic(Request $request)
 {
     if ($request->ajax()) {
@@ -74,41 +88,46 @@ class GuruController extends Controller
         $data['mapel'] = Mapel::all();
         return view('admin.guru.edit', $data);
     }
-
-    function update(Request $request, $guru)
+    function update(Request $request, Guru $guru)
     {
-        $guru = Guru::findOrFail($guru);
-
-
-
-        if ($request->hasFile('foto')) {
-
-            $fotoLama = $guru->foto;
-
-            if ($fotoLama && file_exists(storage_path($fotoLama))) {
-                unlink(storage_path($fotoLama));
-            }
-
-            $imageName = time() . '.' . $request->foto->extension();
-            $request->foto->move(public_path('images/guru'), $imageName);
-
-            $guru->foto = 'images/guru/' . $imageName;
+        $guru = Guru::findOrFail($guru->id);
+    
+        $existingPhotoPaths = json_decode($guru->foto, true); // Get existing photo paths
+    
+        // Process uploaded photos
+        $photoPaths = [];
+        foreach ($request->file('foto') as $key => $photo) {
+            $fileName = time() . '_' . $photo->getClientOriginalName();
+            $path = Storage::disk('public')->put('images/guru', $photo);
+            $photoPaths[] = $path;
         }
-
+    
+        // Delete old photos if not present in new set
+        foreach ($existingPhotoPaths as $existingPath) {
+            if (!in_array($existingPath, $photoPaths)) {
+                Storage::disk('public')->delete($existingPath);
+            }
+        }
+    
+        // Update teacher data
         $guru->nama = $request->nama;
         $guru->nip = $request->nip;
         $guru->jk = $request->jk;
         $guru->alamat = $request->alamat;
         $guru->tlp = $request->tlp;
+        $guru->foto = json_encode($photoPaths);
         $guru->mapel_id = $request->mapel_id;
-
+    
         if ($request->filled('password')) {
             $guru->password = Hash::make($request->password);
         }
-
+    
         $guru->save();
-        return redirect('/guru')->with('upadate', 'Data Berhasil disimpan');
+    
+        return redirect('/guru')->with('update', 'Data Berhasil disimpan');
     }
+    
+
 
 
     function destroy(Guru $guru)

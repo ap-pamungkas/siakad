@@ -27,6 +27,11 @@ public function mapel()
 {
     return $this->belongsTo(Mapel::class);
 }
+
+
+public function kelas(){
+    return $this->hasOne(Kelas::class);
+}
 // Access related mapels by ID
 
 

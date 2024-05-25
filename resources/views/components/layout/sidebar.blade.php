@@ -23,6 +23,7 @@
        <x-layout.sidebar.menu-item label="Guru" icon="fas fa-user" url="/guru" />
        <x-layout.sidebar.menu-item label="Siswa" icon="fas fa-users" url="/siswa" />
        <x-layout.sidebar.menu-item label="Mata Pelajaran" icon="fas fa-book" url="/mapel" />
+       <x-layout.sidebar.menu-item label="Kelas " icon="fas fa-chalkboard-teacher" url="/kelas" />
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
