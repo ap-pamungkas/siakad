@@ -12,7 +12,7 @@ use App\Models\Semester;
 class KelasController extends Controller
 {
     function index(){
-
+ $data = Kelas::with('guru', 'semester')->get();
 
         return view('admin.kelas.index');
     }
@@ -39,28 +39,16 @@ class KelasController extends Controller
 
     public function dataTableLogic(Request $request)
     {
-        // Controller (dataTableLogic function)
+        if ($request->ajax()) {
+            $kelas = Kelas::with('guru', 'semester')->orderBy('updated_at', 'desc');
 
-if ($request->ajax()) {
-    $kelas = Kelas::with('semester', 'guru')->orderBy('updated_at', 'desc');
-
-    return datatables()->of($kelas)
-        ->addColumn('nama_guru', function ($kelas) {
-            return $kelas->guru ? $kelas->guru->nama : ''; // Provide a default value if guru is missing
-        })
-        ->addColumn('periode', function ($kelas) {
-            return $kelas->semester ? $kelas->semester->periode : '';
-        })
-        ->addColumn('nama_kelas', function ($kelas) {
-            return $kelas->nama_kelas;
-        })
-        ->make(true);
-}
-
-
+            return datatables()->of($kelas)
+                ->make(true);
+        }
 
         return view('index');
     }
+
 
 
 

@@ -11,7 +11,7 @@ class Guru extends Model
 {
     use HasFactory,HasUuids;
     protected $table = 'guru';
-    protected $guarded = ['id'];
+
 
 
 // protected $fillable = [
@@ -23,15 +23,7 @@ class Guru extends Model
 //     'password',
 // ];
 
-public function mapel()
-{
-    return $this->belongsTo(Mapel::class);
-}
 
-
-public function kelas(){
-    return $this->hasOne(Kelas::class, 'guru_id', 'id');
-}
 // Access related mapels by ID
 
 
@@ -50,4 +42,15 @@ static $inputan=[
 static $pesan=[
     'tlp.max' => 'no hp maximal 12 digit',
 ];
+
+public function mapel()
+{
+    return $this->belongsTo(Mapel::class);
+}
+
+
+function kelas(){
+    return $this->hasMany(Kelas::class);
+
+}
 }

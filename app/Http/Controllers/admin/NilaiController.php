@@ -48,27 +48,27 @@ class NilaiController extends Controller
         return view('admin.nilai.show-kelas', $data);
     }
 
-    public function dataTableSiswa(Request $request)
-    {
-        if ($request->ajax()) {
-            $kelas = Kelas::with('siswa')
-            ->orderBy('updated_at', 'desc')
-            ->get();
+    // public function dataTableSiswa(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $kelas = Kelas::with('siswa')
+    //         ->orderBy('updated_at', 'desc')
+    //         ->get();
 
-            return datatables($kelas)
+    //         return datatables($kelas)
 
-            ->addColumn('nisn', function ($kelas) {
-                return $kelas->siswa->first() ? $kelas->siswa->first()->nisn : '';
-            })
-            ->addColumn('nama', function ($kelas) {
-                return $kelas->siswa->first() ? $kelas->siswa->first()->nama : '';
-            })
+    //         ->addColumn('nisn', function ($kelas) {
+    //             return $kelas->siswa->first() ? $kelas->siswa->first()->nisn : '';
+    //         })
+    //         ->addColumn('nama', function ($kelas) {
+    //             return $kelas->siswa->first() ? $kelas->siswa->first()->nama : '';
+    //         })
 
-                ->make(true);
-        }
+    //             ->make(true);
+    //     }
 
-        return view('index');
-    }
+    //     return view('index');
+    // }
 
 
 // function edit($nilai){

@@ -18,7 +18,13 @@ class Semester extends Model
         return $this->hasMany(Nilai::class, 'semester_id', 'id');
     }
 
+    /**
+     * Return all kelas that belongs to this semester
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     function kelas(){
-        return $this->HasMany(Kelas::class, 'kelas_id', 'id');
+        return $this->hasMany(Kelas::class, 'semester_id', 'id');
+
     }
 }

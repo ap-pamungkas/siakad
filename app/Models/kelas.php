@@ -12,14 +12,13 @@ class kelas extends Model
 
     protected $table="kelas";
 
+
     public function guru()
     {
-        return $this->belongsTo(Guru::class, 'guru_id');
+        return $this->belongsTo(Guru::class);
     }
-
-
     function siswa(){
-        return $this->hasMany(siswa::class);
+        return $this->hasMany(Siswa::class);
     }
 
     public function nilai()

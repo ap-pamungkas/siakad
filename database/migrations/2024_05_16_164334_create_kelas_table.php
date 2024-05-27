@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('tingkat_kelas');
-            $table->string('nama_kelas');
             $table->string('guru_id');
+            $table->string('nama_kelas');
+
             $table->string('siswa_id')->nullable();
             $table->timestamps();
         });
