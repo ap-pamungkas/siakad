@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="{{ url('/guru/store') }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ url('/admin/guru/store') }}" enctype="multipart/form-data" method="POST">
                 @csrf
 
                 <div class="row">
@@ -70,17 +70,20 @@
                         <span class="text-danger float-end" id="nama">{{$message}}</span>
                         @enderror --}}
                     </div>
+                    <div class="col-md-6">
+                        <label for="" class="form-label">No Hp</label></label>
+
+                        <input type="number" name="tlp"  multiple class="form-control">
+                        {{-- @error('nama')
+                        <span class="text-danger float-end" id="nama">{{$message}}</span>
+                        @enderror --}}
+                    </div>
 
 
-                <div class="col-md-6">
-                    <label for="" class="form-label">No hp</label>
-                    <input type="number" name="tlp" class="form-control">
-                    @error('tlp')
-                        <span class="text-danger float-end" id="nip">{{ $message }}</span>
-                    @enderror
+
+
                 </div>
-
-                </div>
+              <div class="row"></div>
                 <div class="row">
                 <div class="col-md-12">
                     <label for="" class="form-label">Alamat</label>

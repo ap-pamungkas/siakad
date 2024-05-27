@@ -25,7 +25,7 @@ class MapelController extends Controller
         $mapel->nama_mapel = $request->nama_mapel;
 
         $mapel->save();
-        return redirect('/mapel')->with('create', 'data berhasil di tambah');
+        return redirect('admin/mapel')->with('create', 'data berhasil di tambah');
     }
 
     public function dataTableLogic(Request $request)
@@ -55,7 +55,7 @@ function edit($id){
     $mapel->nama_mapel = $request->nama_mapel;
     $mapel->save();
 
-    return redirect('/mapel')->with('update', 'data berhasil di Edit');
+    return redirect('admin/mapel')->with('update', 'data berhasil di Edit');
 }
 
 
@@ -63,7 +63,7 @@ function destroy(Mapel $mapel)
 {
     $mapel->delete();
 
-    return redirect('/mapel')->with('delete', 'Data Berhasil Dihapus');
+    return redirect('admin/mapel')->with('delete', 'Data Berhasil Dihapus');
 }
 
 }

@@ -8,7 +8,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ url('/kepala-sekolah/update') }}/{{ $kps->id }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ url('/admin/kepala-sekolah/update') }}/{{ $kps->id }}" enctype="multipart/form-data" method="POST">
                 @csrf
             @method('PUT')
                 <div class="row">
@@ -29,18 +29,21 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-12 ">
+                    <div class="col-md-12">
                         <label for="" class="form-label">Foto</label>
-                        <input type="file" name="foto"  class="form-control">
-                        <div class="col-md-2 mt-2 ">
-                            <img class="bg-primary" src="{{asset('public') }}/{{ $kps->foto }} " alt="" width="100%">
-                        </div>
+                        <input type="file"  name="foto[]" class="form-control" multiple>
                         @error('images')
-                        <span class="text-danger float-end" id="nip">{{$message}}</span>
+                            <span class="text-danger float-end" id="nip">{{ $message }}</span>
                         @enderror
-
                     </div>
 
+                    <div class="col-md-12">
+                        <label for="" class="form-label">no Hp</label>
+                        <input type="number" value="{{ $kps->tlp }}" name="tlp" class="form-control">
+                        {{-- @error('password')
+                        <span class="text-danger float-end" id="password">{{$message}}</span>
+                        @enderror --}}
+                    </div>
                     <div class="col-md-12">
                         <label for="" class="form-label">password</label>
                         <input type="password" name="password" class="form-control" minlength="8" >

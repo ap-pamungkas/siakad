@@ -3,9 +3,9 @@
     <div class="card mt-5 shadow">
         <div class="card-header">
             <div class="card-title">
-                Data guru
+                Data Nilai
             </div>
-            <a href="{{ url('/admin/guru/create') }}" class="btn btn-primary float-right"> Tambah
+            <a href="{{ url('admin/nilai/create') }}" class="btn btn-primary float-right">  Tambah
                 <i class="fas fa-plus"></i>
             </a>
         </div>
@@ -16,11 +16,12 @@
   <th>No</th>
   <th>No</th>
   <th>Aksi</th>
-  <th>Nip</th>
-  <th>Nama</th>
-  <th>Jenis Kelamin</th>
-  <th>No Hp</th>
-  <th> Pengampuh Mata Pelajaran</th>
+  <th>Kelas</th>
+  <th>semester</th>
+  <th>Tahun Ajaran</th>
+
+
+
 
 </tr>
             </thead>
@@ -41,7 +42,8 @@
   $('#y_dataTables').DataTable({
          processing: true,
          serverSide: true,
-         ajax: "{{ url('admin/listGuru') }}",
+         ajax: "{{ url('admin/listKelas') }}",
+
          columns: [
                   { data: 'id', name: 'id',  visible: false },
                   {
@@ -56,19 +58,19 @@
        render: function(data, type, row) {
          // Buat tombol aksi secara dinamis di dalam fungsi render
          return `
-          <center>  <x-button.button-action url="{{ url('/admin/guru/detail/') }}/${row.id}" label="Detail" icon="fas fa-eye" class="btn btn-info" />
-            <x-button.button-action url="{{ url('/admin/guru') }}/${row.id}/edit" label="Edit" icon="fas fa-edit" class="btn btn-warning" />
-            <x-button.delete id="${row.id}" />
+          <center>
+            <x-button.button-action url="{{ url('admin/kelas-detail/') }}/${row.id}" label="Detail" icon="fas fa-eye" class="btn btn-primary" />
+
             </center>`;
         }
     },
-                  { data: 'nip', name: 'nip' },
-                  { data: 'nama', name: 'nama' },
 
-                { data: 'jk', name: 'jk' },
+    { data: 'nama_kelas', name: 'nama_kelas'  },
 
-                { data: 'tlp', name: 'tlp' },
-                { data: 'mapel.nama_mapel', name: 'mapel.nama_mapel' },
+    { data: 'semester.periode', name: 'semester.periode' },
+    { data: 'semester.tahun_ajaran', name: 'semester.tahun_ajaran' },
+
+
 
 
                ]
@@ -76,7 +78,7 @@
    });
 </script>
 @endpush
-
+{{-- <x-button.button-action url="{{ url('/guru/detail/') }}/${row.id}" label="Detail" icon="fas fa-eye" class="btn btn-info" /> --}}
 
 
 </x-app>

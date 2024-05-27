@@ -7,7 +7,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ url('/mapel/store') }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ url('admin/mapel/store') }}" enctype="multipart/form-data" method="POST">
                 @csrf
 
                 <div class="row">

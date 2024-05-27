@@ -30,7 +30,7 @@ public function mapel()
 
 
 public function kelas(){
-    return $this->hasOne(Kelas::class);
+    return $this->hasOne(Kelas::class, 'guru_id', 'id');
 }
 // Access related mapels by ID
 

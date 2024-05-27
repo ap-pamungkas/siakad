@@ -28,17 +28,7 @@ class MenuItem extends Component
     * Get the view / contents that represent the component.
     */
 
-//    public function checkActive()
-//     {
-//         $state = true;
-//         $url = $this->url;
-//         $arr_url = explode('*', $url);
-//         foreach ($arr_url as $key => $value) {
-//             $segment = request()->segment($key + 1);
-//             if ($segment != $value) $state = false;
-//         }
-//         return $state;
-//     }
+
 public function checkActive()
 {
     $state = true;

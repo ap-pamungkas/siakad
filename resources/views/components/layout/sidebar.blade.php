@@ -18,12 +18,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-       <x-layout.sidebar.menu-item label="Dashboard" icon="fas fa-home" url="/" />
-       <x-layout.sidebar.menu-item label="Kepala Sekolah" icon="fas fa-user-tie" url="/kepala-sekolah" />
-       <x-layout.sidebar.menu-item label="Guru" icon="fas fa-user" url="/guru" />
-       <x-layout.sidebar.menu-item label="Siswa" icon="fas fa-users" url="/siswa" />
-       <x-layout.sidebar.menu-item label="Mata Pelajaran" icon="fas fa-book" url="/mapel" />
-       <x-layout.sidebar.menu-item label="Kelas " icon="fas fa-chalkboard-teacher" url="/kelas" />
+       <x-layout.sidebar.menu-item label="Dashboard" icon="fas fa-home" url="admin/" />
+       <x-layout.sidebar.menu-item label="Kepala Sekolah" icon="fas fa-user-tie" url="admin/kepala-sekolah" />
+       <x-layout.sidebar.menu-item label="Guru" icon="fas fa-user" url="admin/guru" />
+       <x-layout.sidebar.menu-item label="Siswa" icon="fas fa-users" url="admin/siswa" />
+       <x-layout.sidebar.menu-item label="Mata Pelajaran" icon="fas fa-book" url="admin/mapel" />
+       <x-layout.sidebar.menu-item label="Kelas " icon="fas fa-chalkboard-teacher" url="admin/kelas" />
+       <x-layout.sidebar.menu-item label="Semester " icon="fas fa-chalkboard-teacher" url="admin/semester" />
+       <x-layout.sidebar.menu-item label="Nilai " icon="fas fa-pager" url="admin/nilai" />
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

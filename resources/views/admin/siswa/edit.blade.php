@@ -6,13 +6,13 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="{{ url('admin/siswa/store') }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ url('admin/siswa/update') }}/{{ $siswa->id }}" enctype="multipart/form-data" method="POST">
                 @csrf
-
+        @method('PUT')
                 <div class="row">
                     <div class="col-md-6">
                         <label for="" class="form-label">Nama</label></label>
-                        <input type="text" name="nama" class="form-control">
+                        <input type="text" name="nama" value="{{ $siswa->nama }}" class="form-control">
 
                         {{-- @error('nama')
                         <span class="text-danger float-end" id="nama">{{$message}}</span>
@@ -21,7 +21,7 @@
 
                     <div class="col-md-6">
                         <label for="" class="form-label">NISN</label>
-                        <input type="number" name="nisn" class="form-control">
+                        <input type="number" name="nisn" value="{{ $siswa->nisn }}" class="form-control">
                         @error('nip')
                             <span class="text-danger float-end" id="nip">{{ $message }}</span>
                         @enderror
@@ -33,7 +33,7 @@
                         <label for="" class="form-label">Jenis Kelamin</label></label>
 
                         <select class="form-control select2" style="width: 100%;" name="jk">
-                            <option >Jenis Kelamin</option>
+                            <option value="{{ $siswa->jk }}" >{{ $siswa->jk }}</option>
                             <option value="laki-laki">laki-laki</option>
                             <option value="perempuan">perempuan</option>
 
@@ -47,7 +47,7 @@
 
                 <div class="col-md-6">
                     <label for="" class="form-label">No hp orang Tua/wali</label>
-                    <input type="number" name="tlp" class="form-control">
+                    <input type="number" value="{{ $siswa->tlp }}" name="tlp" class="form-control">
                     @error('images')
                         <span class="text-danger float-end" id="nip">{{ $message }}</span>
                     @enderror
@@ -57,11 +57,27 @@
 
 
 <div class="row">
+                <div class="col-md-6">
+                    <label for="" class="form-label">Kelas</label>
+                    <select class="form-control select2" style="width: 100%;" name="kelas_id">
+                        @if (@isset($siswa) )
+                               <option value="{{ $siswa->kelas_id }}" selected> {{ $siswa->kelas->nama_kelas }} </option>
+                           @endif
+                        @foreach ($kelas as $kls)
+                        <option value="{{ $kls->id }}">{{ $kls->nama_kelas }}</option>
+                      @endforeach
 
-                <div class="col-md-12">
+                      </select>
+                    @error('tlp')
+                        <span class="text-danger float-end" id="nip">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="col-md-6">
                     <label for="" class="form-label">Semester</label>
                     <select class="form-control select2" style="width: 100%;" name="semester_id">
-                        <option >Semester</option>
+                        @if (@isset($siswa) )
+                        <option value="{{ $siswa->semester_id }}" selected> {{ $siswa->semester->periode }} </option>
+                    @endif
                         @foreach ($semester as $smtr)
                         <option value="{{ $smtr->id }}">{{ $smtr->periode }}</option>
                       @endforeach
@@ -75,14 +91,14 @@
 <div class="row">
                 <div class="col-md-6">
                     <label for="" class="form-label">Tempat Lahir</label>
-                    <input type="text" name="tempat_lahir" class="form-control">
+                    <input type="text" name="tempat_lahir" value="{{ $siswa->tempat_lahir }}" class="form-control">
                     @error('tlp')
                         <span class="text-danger float-end" id="nip">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-md-6">
                     <label for="" class="form-label">Tanggal Lahir</label>
-                    <input type="date" name="tgl_lahir" class="form-control">
+                    <input type="date"  value="{{ $siswa->tgl_lahir }}" name="tgl_lahir" class="form-control">
                     @error('tlp')
                         <span class="text-danger float-end" id="nip">{{ $message }}</span>
                     @enderror
@@ -91,14 +107,14 @@
 <div class="row">
                 <div class="col-md-6">
                     <label for="" class="form-label">foto</label>
-                    <input type="file" name="foto[]" class="form-control">
+                    <input type="file"  name="foto[]"  class="form-control">
                     @error('tlp')
                         <span class="text-danger float-end" id="nip">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-md-6">
                     <label for="" class="form-label">orang Tua/wali</label>
-                    <input type="text" name="orang_tua_wali" class="form-control">
+                    <input type="text" name="orang_tua_wali" value="{{ $siswa->orang_tua_Wali }}"  class="form-control">
                     @error('tlp')
                         <span class="text-danger float-end" id="nip">{{ $message }}</span>
                     @enderror
@@ -107,11 +123,11 @@
 
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <label for="" class="form-label">Agama</label></label>
 
             <select class="form-control select2" style="width: 100%;" name="agama">
-                <option >Pilih Agama</option>
+                <option value="{{ $siswa->agama }}">{{ $siswa->agama }}</option>
                 <option value="islam">Islam</option>
                 <option value="katolik">Katolik</option>
                 <option value="kristen">Kristen</option>
@@ -121,13 +137,6 @@
 
               </select>
 
-            </div>
-            <div class="col-md-6">
-                <label for="" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control">
-                @error('tlp')
-                    <span class="text-danger float-end" id="nip">{{ $message }}</span>
-                @enderror
             {{-- @error('nama')
             <span class="text-danger float-end" id="nama">{{$message}}</span>
             @enderror --}}
@@ -139,7 +148,7 @@
 <div class="row">
     <div class="col-md-12">
         <label for="" class="form-label">Alamat</label>
-        <textarea name="alamat" id="" class="form-control"></textarea>
+        <textarea name="alamat" id="" class="form-control">{{ $siswa->alamat }}</textarea>
         {{-- @error('tlp')
             <span class="text-danger float-end" id="nip">{{ $message }}</span>
         @enderror --}}

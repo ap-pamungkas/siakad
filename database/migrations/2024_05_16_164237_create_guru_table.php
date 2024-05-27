@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('alamat');
             $table->char('tlp', 13);
             $table->string('mapel_id');
-
             $table->string('password');
             $table->timestamps();
         });

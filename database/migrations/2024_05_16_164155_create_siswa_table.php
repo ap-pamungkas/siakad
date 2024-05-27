@@ -20,9 +20,8 @@ return new class extends Migration
               $table->date('tgl_lahir');
               $table->text('alamat');
               $table->string('orang_tua_Wali');
-              $table->integer('tlp');
-              $table->string('kelas_id');
-
+              $table->char('tlp');
+              $table->string('password');
                $table->timestamps();
         });
     }

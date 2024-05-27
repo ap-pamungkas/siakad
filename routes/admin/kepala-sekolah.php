@@ -15,6 +15,8 @@ Route::controller(KepalaSekolahController::class)->group(function () {
     Route::post('/kepala-sekolah/store', 'store');
     Route::get('/kepala-sekolah/{kps}/edit', 'edit');
     Route::get('/kepala-sekolah/detail/{kps}', 'show');
+    Route::get('listKps',  'dataTableLogic')->name('list');
+
     Route::put('/kepala-sekolah/update/{kps}', 'update');
     Route::delete('/kepala-sekolah/{kps}', 'destroy');
 });

@@ -7,7 +7,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ url('/kelas/update') }}/{{ $kelas->id }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ url('/admin/kelas/update') }}/{{ $kelas->id }}" enctype="multipart/form-data" method="POST">
                 @csrf
 @method('PUT')
                 <div class="row">

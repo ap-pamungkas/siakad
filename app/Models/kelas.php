@@ -12,7 +12,23 @@ class kelas extends Model
 
     protected $table="kelas";
 
-    function guru(){
-        return $this->belongsTo(guru::class);
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'guru_id');
     }
+
+
+    function siswa(){
+        return $this->hasMany(siswa::class);
+    }
+
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class, 'kelas_id');
+    }
+
+    function semester(){
+        return $this->belongsTo(Semester::class, 'semester_id');
+    }
+
 }

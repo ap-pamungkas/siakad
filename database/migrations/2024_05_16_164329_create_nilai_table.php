@@ -15,8 +15,14 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('siswa_id');
             $table->string('mapel_id');
-            $table->string('semester');
-            $table->integer('nilai');
+
+
+            $table->string('kelas_id');
+            $table->integer('tugas');
+            $table->integer('nilai_uts');
+            $table->integer('nilai_uas');
+            $table->string('nilai_ulangan');
+            $table->string('nilai_akhir');
             $table->string('guru_id');
             $table->timestamps();
         });
@@ -28,5 +34,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('nilai');
+
     }
 };

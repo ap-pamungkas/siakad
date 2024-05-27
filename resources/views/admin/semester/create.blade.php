@@ -7,26 +7,35 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ url('admin/mapel/update') }}/{{$mapel->id}}" enctype="multipart/form-data" method="POST">
+            <form action="{{ url('admin/semester/store') }}" enctype="multipart/form-data" method="POST">
                 @csrf
-@method("PUT")
+
                 <div class="row">
+
+
                     <div class="col-md-6">
-                        <label for="" class="form-label">Kode Mata Pelajaran</label>
-                        <input type="text" name="kode_mapel" value="{{ $mapel->kode_mapel  }}" class="form-control">
+                        <label for="" class="form-label">Periode</label></label>
+                        <select class="form-control select2" style="width: 100%;" name="periode">
+                            <option >Pilih Semester</option>
+                            <option value="genap">genap</option>
+                            <option value="ganjil">Ganjil</option>
+
+
+                          </select>
+
 
                         {{-- @error('nama')
                         <span class="text-danger float-end" id="nama">{{$message}}</span>
                         @enderror --}}
                     </div>
                     <div class="col-md-6">
-                        <label for="" class="form-label">Mata Pelajaran</label>
-                        <input type="text" name="nama_mapel" value="{{ $mapel->nama_mapel  }}" class="form-control">
-
-                        {{-- @error('nama')
-                        <span class="text-danger float-end" id="nama">{{$message}}</span>
-                        @enderror --}}
+                        <label for="" class="form-label">Tahun Ajaran</label>
+                        <input type="text" name="tahun_ajaran" class="form-control">
+                        @error('images')
+                            <span class="text-danger float-end" id="nip">{{ $message }}</span>
+                        @enderror
                     </div>
+
 
                 </div>
 

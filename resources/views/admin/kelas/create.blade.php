@@ -7,7 +7,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ url('/kelas/store') }}" enctype="multipart/form-data" method="POST">
+            <form action="{{ url('/admin/kelas/store') }}" enctype="multipart/form-data" method="POST">
                 @csrf
 
                 <div class="row">
@@ -27,12 +27,26 @@
                         <span class="text-danger float-end" id="nama">{{$message}}</span>
                         @enderror
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label for="" class="form-label">Wali Kelas</label></label>
                         <select class="form-control select2" style="width: 100%;" name="guru_id">
                             <option >Pilih Wali Kelas</option>
                            @foreach ($guru as $guru)
                             <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                          @endforeach
+
+                          </select>
+
+                        {{-- @error('nama')
+                        <span class="text-danger float-end" id="nama">{{$message}}</span>
+                        @enderror --}}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="" class="form-label">Semester</label></label>
+                        <select class="form-control select2" style="width: 100%;" name="semester_id">
+                            <option >Pilih Semester</option>
+                           @foreach ($semester as $smtr)
+                            <option value="{{ $smtr->id }}">{{ $smtr->periode }}</option>
                           @endforeach
 
                           </select>
