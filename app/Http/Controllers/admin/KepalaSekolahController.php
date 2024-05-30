@@ -27,19 +27,20 @@ class KepalaSekolahController extends Controller
 
     function store(Request $request, KepalaSekolah $kepalaSekolah)
     {
-        $request->validate($kepalaSekolah::$input, $kepalaSekolah::$pesan);
-        $photoPaths = [];
-        foreach ($request->file('foto') as $key => $photo) {
-          $fileName = time() . '_' . $photo->getClientOriginalName();  // Unique filename
-          $path = Storage::disk('public')->put('images/kepala-sekolah', $photo);  // Save to 'public/images/guru'
-          $photoPaths[] = $path;
-        }
-
+        // $request->validate($kepalaSekolah::$input, $kepalaSekolah::$pesan);
+     
+    $photoPath = null;
+    if ($request->hasFile('foto')) {
+        $photo = $request->file('foto');
+        $fileName = time(). '_'. $photo->getClientOriginalName();  // Unique filename
+        $path = Storage::disk('public')->put('images/guru', $photo);  // Save to 'public/images/guru'
+        $photoPath = $path;
+    }
 
         $kps = new $kepalaSekolah;
         $kps->nama = $request->nama;
         $kps->nip = $request->nip;
-        $kps->foto = json_encode($photoPaths);
+        $kps->foto =$photoPath;
         $kps->tlp = $request->tlp;
         $kps->password = Hash::make($request->password);
 
@@ -57,28 +58,23 @@ class KepalaSekolahController extends Controller
   function update(KepalaSekolah $kepalaSekolah, Request $request, $kps)
 {
     $kps = KepalaSekolah::findOrFail($kps);
-    $existingPhotoPaths = json_decode($kps->foto, true); // Get existing photo paths
+    $existingPhotoPath = $kps->foto; // Get existing photo path
 
-    // Process uploaded photos
-    $photoPaths = [];
+    // Process uploaded photo
     if ($request->hasFile('foto')) {
-        foreach ($request->file('foto') as $key => $photo) {
-            $fileName = time() . '_' . $photo->getClientOriginalName();
-            $path = Storage::disk('public')->put('images/guru', $photo);
-            $photoPaths[] = $path;
-        }
+        $photo = $request->file('foto');
+        $fileName = time(). '_'. $photo->getClientOriginalName();
+        $path = Storage::disk('public')->put('images/kepala-sekolah', $photo);
+        $photoPath = $path;
     } else {
-        // If no new files uploaded, retain existing photo paths
-        $photoPaths = $existingPhotoPaths;
+        // If no new file uploaded, retain existing photo path
+        $photoPath = $existingPhotoPath;
     }
-
-    // Delete old photos if not present in new set
-    foreach ($existingPhotoPaths as $existingPath) {
-        if (!in_array($existingPath, $photoPaths)) {
-            Storage::disk('public')->delete($existingPath);
-        }
+    
+    // Delete old photo if not present in new set
+    if ($existingPhotoPath!== $photoPath) {
+        Storage::disk('public')->delete($existingPhotoPath);
     }
-
 
 
   // Update KepalaSekolah object regardless of foto change
@@ -86,7 +82,7 @@ class KepalaSekolahController extends Controller
   $kps->nama = $request->nama;
   $kps->nip = $request->nip;
   $kps->tlp = $request->tlp;
-  $kps->foto = json_encode($photoPaths);
+  $kps->foto = $photoPath;
   if ($request->filled('password')) {
     $kps->password = Hash::make($request->password);
   }

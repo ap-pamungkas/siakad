@@ -47,7 +47,7 @@
 
                 <div class="col-md-6">
                     <label for="" class="form-label">Foto</label>
-                    <input type="file" name="foto[]"  multiple class="form-control">
+                    <input type="file" name="foto"  class="form-control">
                     @error('images')
                         <span class="text-danger float-end" id="nip">{{ $message }}</span>
                     @enderror

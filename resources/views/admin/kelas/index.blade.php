@@ -21,12 +21,22 @@
                         <th>Semester</th>
                     </tr>
                 </thead>
+                <tbody>
+                    @foreach($guru as $item)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                    </tr>
+
+                    @endforeach
+                </body>
             </table>
+
+            {{ $guru->links() }}
         </div>
     </div>
 
     <x-page.notif />
-    @push('script')
+    {{-- @push('script')
     <script>
      $(document).ready(function () {
     $('#y_dataTables').DataTable({
@@ -63,5 +73,5 @@
     });
 });
     </script>
-    @endpush
+    @endpush --}}
 </x-app>

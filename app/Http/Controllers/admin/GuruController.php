@@ -29,22 +29,14 @@ class GuruController extends Controller
 
     public function store(Request $request)
   {
-    // $validatedData = $request->validate([
-    //   'nama' => 'required',
-    //   'nip' => 'required|unique:guru,nip',  // Ensure unique NIP
-    //   'jk' => 'required|in:L,P',  // Validate gender (L/P)
-    //   'alamat' => 'required',
-    //   'tlp' => 'required',
-    //   'mapel_id' => 'required|exists:mapel,id',  // Ensure valid mapel ID
-    //   'password' => 'required|min:8|confirmed',  // Validate password
-    //   'foto' => 'required|array|mimes:jpeg,png,jpg|max:2048',  // Validate multiple photos
-    // ]);
 
-    $photoPaths = [];
-    foreach ($request->file('foto') as $key => $photo) {
-      $fileName = time() . '_' . $photo->getClientOriginalName();  // Unique filename
-      $path = Storage::disk('public')->put('images/guru', $photo);  // Save to 'public/images/guru'
-      $photoPaths[] = $path;
+
+    $photoPath = null;
+    if ($request->hasFile('foto')) {
+        $photo = $request->file('foto');
+        $fileName = time(). '_'. $photo->getClientOriginalName();  // Unique filename
+        $path = Storage::disk('public')->put('images/guru', $photo);  // Save to 'public/images/guru'
+        $photoPath = $path;
     }
 
     // Save teacher data to the database
@@ -56,7 +48,7 @@ class GuruController extends Controller
     $guru->tlp = $request->tlp;
     $guru->mapel_id = $request->mapel_id;
     $guru->password = Hash::make($request->password);
-    $guru->foto = json_encode($photoPaths);
+    $guru->foto = $photoPath;
     // $guru->kelas->id = $request->kelas_id;
     $guru->save();
 
@@ -96,27 +88,22 @@ class GuruController extends Controller
         $guru = Guru::findOrFail($guru->id);
 
 
+        $existingPhotoPath = $guru->foto; // Get existing photo path
 
-        $existingPhotoPaths = json_decode($guru->foto, true); // Get existing photo paths
-
-        // Process uploaded photos
-        $photoPaths = [];
+        // Process uploaded photo
         if ($request->hasFile('foto')) {
-            foreach ($request->file('foto') as $key => $photo) {
-                $fileName = time() . '_' . $photo->getClientOriginalName();
-                $path = Storage::disk('public')->put('images/guru', $photo);
-                $photoPaths[] = $path;
-            }
+            $photo = $request->file('foto');
+            $fileName = time(). '_'. $photo->getClientOriginalName();
+            $path = Storage::disk('public')->put('images/guru', $photo);
+            $photoPath = $path;
         } else {
-            // If no new files uploaded, retain existing photo paths
-            $photoPaths = $existingPhotoPaths;
+            // If no new file uploaded, retain existing photo path
+            $photoPath = $existingPhotoPath;
         }
-
-        // Delete old photos if not present in new set
-        foreach ($existingPhotoPaths as $existingPath) {
-            if (!in_array($existingPath, $photoPaths)) {
-                Storage::disk('public')->delete($existingPath);
-            }
+        
+        // Delete old photo if not present in new set
+        if ($existingPhotoPath!== $photoPath) {
+            Storage::disk('public')->delete($existingPhotoPath);
         }
 
         // Update teacher data
@@ -125,7 +112,7 @@ class GuruController extends Controller
         $guru->jk = $request->jk;
         $guru->alamat = $request->alamat;
         $guru->tlp = $request->tlp;
-        $guru->foto = json_encode($photoPaths);
+        $guru->foto = $photoPath;
         $guru->mapel_id = $request->mapel_id;
 
 

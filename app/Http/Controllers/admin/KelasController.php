@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\kelas;
 use App\Models\Guru;
 use App\Models\Semester;
+use Illuminate\Pagination\simplePaginate;
+
 
 
 class KelasController extends Controller
 {
     function index(){
- $data = Kelas::with('guru', 'semester')->get();
-
-        return view('admin.kelas.index');
+    $data = Kelas::with('guru', 'semester')->get();
+    $data['guru'] = Kelas::simplePaginate(15);;
+        return view('admin.kelas.index',$data);
     }
 
     function create(){

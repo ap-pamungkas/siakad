@@ -42,19 +42,12 @@
             </div>
             <div class="col-md-6">
                 <b>Foto :</b>
+                <dd></dd>
                 @if (!empty($guru->foto))
-                  <?php
-                    $photoPaths = json_decode($guru->foto, true); // Decode JSON to array
-                  ?>
-                  <div class="d-flex flex-wrap justify-content-between">
-                    @foreach ($photoPaths as $photoPath)
-                      <img src="{{ asset('storage/app/public/' . $photoPath) }}" alt="Guru Photo" width="25%" class="mb-2">
-                    @endforeach
-                  </div>
-                @else
-                  <p>Tidak ada foto yang tersedia</p>
-                @endif
-              </div>
+                <img src="{{ asset('storage/app/public/'. $guru->foto) }}" alt="Guru Photo" width="25%" class="mb-2">
+              @else
+                <p>Tidak ada foto yang tersedia</p>
+              @endif
            </div>
         </div>
     </div>

@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="" class="form-label">Foto</label>
-                        <input type="file" name="foto[]" class="form-control "  multiple>
+                        <input type="file" name="foto" class="form-control "  multiple>
                         @error('foto')
                         <span class="text-danger float-end" id="nip">{{$message}}</span>
                         @enderror

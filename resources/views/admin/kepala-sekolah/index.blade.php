@@ -1,36 +1,37 @@
-<x-app>
-
+<x-app> 
     <div class="card mt-5 shadow">
         <div class="card-header">
             <div class="card-title">
-                Data Kepala Sekolah
+                Data guru
             </div>
-            <a href="{{ url('admin/kepala-sekolah/create') }}" class="btn btn-primary float-right"> Tambah
+            <a href="{{ url('/admin/kepala-sekolah/create') }}" class="btn btn-primary float-right"> Tambah
                 <i class="fas fa-plus"></i>
             </a>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="y_dataTables">
-                <thead>
+            <thead>
+<tr>
+  <th>No</th>
+  <th>No</th>
+  <th>Aksi</th>
+  <th>Nip</th>
+  <th>Nama</th>
+ 
+ 
 
-                <tr>
-             <td width="5%"><center>No</center></td>
-             <td width="5%"><center>No</center></td>
-            <td width="30%">
-                <center> Action </center></td>
-            <td><center>Nip</center></td>
-            <td><center>Nama</center></td>
+</tr>
+            </thead>
 
-                </tr>
-                </thead>
+            </table>
 
 
-        </div>
+
+
 
     </div>
 
-
-
+    </div>
 <x-page.notif />
 @push('script')
 <script>
@@ -53,8 +54,8 @@
        render: function(data, type, row) {
          // Buat tombol aksi secara dinamis di dalam fungsi render
          return `
-          <center>  <x-button.button-action url="{{ url('/admin/guru/detail/') }}/${row.id}" label="Detail" icon="fas fa-eye" class="btn btn-info" />
-            <x-button.button-action url="{{ url('/admin/guru') }}/${row.id}/edit" label="Edit" icon="fas fa-edit" class="btn btn-warning" />
+          <center>  <x-button.button-action url="{{ url('/admin/kepala-sekolah/detail/') }}/${row.id}" label="Detail" icon="fas fa-eye" class="btn btn-info" />
+            <x-button.button-action url="{{ url('/admin/kepala-sekolah') }}/${row.id}/edit" label="Edit" icon="fas fa-edit" class="btn btn-warning" />
             <x-button.delete id="${row.id}" />
             </center>`;
         }
@@ -70,5 +71,5 @@
    });
 </script>
 @endpush
-
 </x-app>
+
